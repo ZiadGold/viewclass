@@ -1,4 +1,4 @@
-const pc = true
+const pc = false
 
 // const puppeteer = require('puppeteer');
 const { MongoClient } = require('mongodb');
@@ -36,6 +36,7 @@ router.get('/', (req, res) => {//second parameter is
 })
 
 const { Keyboard } = require('puppeteer');
+require("dotenv").config();
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
@@ -70,7 +71,7 @@ async function run(){
     var browser;
     //const browser = await puppeteer.launch({headless:false, userDataDir: './viewclass'});
     if (pc) {
-      browser = await puppeteer.launch({headless:false, userDataDir: './viewclass', args:[
+      browser = await puppeteer.launch({headless:false, args:[
         '--no-sandbox',
         '--disable-gpu',
         '--enable-webgl',
@@ -78,7 +79,7 @@ async function run(){
      ]});
     }
     else {
-      browser = await puppeteer.launch({executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(), headless:false, userDataDir: './viewclass', args:[
+      browser = await puppeteer.launch({executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(), userDataDir: './viewclass', args:[
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--no-zygote',
@@ -122,7 +123,7 @@ async function run(){
         // Click on reCAPTCHA checkbox
         await frame.waitForSelector('#recaptcha-anchor-label');
         await frame.click('#recaptcha-anchor-label');
-        await new Promise(resolve => setTimeout(resolve, 6000));
+        await new Promise(resolve => setTimeout(resolve, 8000));
 
 
         var title = await page.evaluate(() => document.title)
