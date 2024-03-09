@@ -1,4 +1,4 @@
-const pc = true
+const pc = false
 
 // const puppeteer = require('puppeteer');
 const { MongoClient } = require('mongodb');
@@ -36,6 +36,7 @@ router.get('/', (req, res) => {//second parameter is
 })
 
 const { Keyboard } = require('puppeteer');
+require("dotenv").config();
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
@@ -78,7 +79,7 @@ async function run(){
      ]});
     }
     else {
-      browser = await puppeteer.launch({executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(), headless:false, userDataDir: './viewclass', args:[
+      browser = await puppeteer.launch({executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(), userDataDir: './viewclass', args:[
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--no-zygote',
