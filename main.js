@@ -79,7 +79,7 @@ async function run(){
      ]});
     }
     else {
-      browser = await puppeteer.launch({executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(), userDataDir: './viewclass', args:[
+      browser = await puppeteer.launch({executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(), args:[
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--no-zygote',
