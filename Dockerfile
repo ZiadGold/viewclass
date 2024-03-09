@@ -11,4 +11,4 @@ RUN npm ci
 
 COPY . .
 
-CMD [ "nodemon", "main.js"]
+CMD [ "node", "main.js"]
