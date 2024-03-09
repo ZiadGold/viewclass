@@ -79,19 +79,14 @@ async function run(){
      ]});
     }
     else {
-      browser = await puppeteer.launch({executablePath: process.env.NODE_ENV === 'production' ? process.env.PUPPETEER_EXECUTABLE_PATH : puppeteer.executablePath(), args:[
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--no-zygote',
-        '--single-process',
-     ]});
+      browser = await puppeteer.launch();
     }
     const page = await browser.newPage();
 
     // const loginUrl = "https://accounts.google.com/AccountChooser?service=mail&continue=https://google.com&hl=en";
-    const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36'; 
+    //const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.91 Mobile Safari/537.36'; 
 
-    await page.setUserAgent(ua);
+    //await page.setUserAgent(ua);
     // await page.goto(loginUrl, { waitUntil: 'networkidle2' });
     // await page.type('input[type="email"]', googleUsername);
     // await page.keyboard.press('Enter');
