@@ -110,6 +110,8 @@ async function run(){
 
     await page.goto("https://example.com/");
     console.log(await page.evaluate(() => document.title))
+    await page.goto("https://my.viewclass.com/login?lang=en");
+    console.log(await page.evaluate(() => document.title))
     var username = "20180055";
     var password = "802330";
     var account_result = await client.db("viewclass").collection("accounts").findOne({username: username});
