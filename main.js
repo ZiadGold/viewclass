@@ -94,6 +94,11 @@ async function run(){
     }
     const page = await browser.newPage();
 
+    const response = await page.goto('http://scooterlabs.com/echo.json');
+
+    console.log(await response.json());
+
+
     // const loginUrl = "https://accounts.google.com/AccountChooser?service=mail&continue=https://google.com&hl=en";
     const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'; 
 
