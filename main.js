@@ -93,6 +93,7 @@ async function run(){
       });
     }
     const page = await browser.newPage();
+    await page.emulateTimezone('Asia/Riyadh');
 
     const response = await page.goto('http://scooterlabs.com/echo.json');
 
