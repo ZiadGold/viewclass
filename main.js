@@ -85,6 +85,7 @@ async function run(){
           "--no-sandbox",
           "--single-process",
           "--no-zygote",
+          "--user-agent",
         ],
         executablePath:
           process.env.NODE_ENV === "production"
