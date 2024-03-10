@@ -79,7 +79,7 @@ async function run(){
      ]});
     }
     else {
-      browser = await puppeteer.launch({
+      browser = await puppeteer.launch({headless:false,
         executablePath:
           process.env.NODE_ENV === "production"
             ? process.env.PUPPETEER_EXECUTABLE_PATH
