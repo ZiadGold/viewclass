@@ -79,7 +79,7 @@ async function run(){
      ]});
     }
     else {
-      browser = await puppeteer.launch({
+      browser = await puppeteer.launch({userDataDir: './viewclass', 
         args: [
           "--disable-setuid-sandbox",
           "--no-sandbox",
@@ -186,12 +186,13 @@ async function run(){
     
 
     // Wait for reCAPTCHA challenge completion (adjust the time as needed)
-    await new Promise(resolve => setTimeout(resolve, 1000*60*60));
-    await page.screenshot({path: "screenshot.png", fullPage: true})
-    await page.pdf({path: "screenshot.pdf", format: "A4"})
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    // await page.screenshot({path: "screenshot.png", fullPage: true})
+    // await page.pdf({path: "screenshot.pdf", format: "A4"})
+    console.log("Closing Browser")
     await browser.close();
 }
-
+run();
 
 const port = process.env.PORT || 5002
 app.use("/", router)
