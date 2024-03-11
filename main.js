@@ -188,9 +188,13 @@ async function run(){
     await browser.close();
 }
 
-run();
+
 
 app.use("/", router)
-app.listen(5000, () => {
+app.listen(process.env.PORT || 80, '0.0.0.0', () => {
     console.log(new Date().toLocaleString())
 })
+
+// app.listen(5000, () => {
+//   console.log(new Date().toLocaleString())
+// })
