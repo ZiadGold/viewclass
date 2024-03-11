@@ -86,24 +86,7 @@ async function run(){
           "--no-sandbox",
           "--single-process",
           "--no-zygote",
-          "--disable-extensions", // Disable extensions to prevent modification
-          "--disable-sync",       // Disable syncing to prevent modification
-          "--disable-gpu",        // Disable GPU to prevent modification
-          "--no-first-run",       // Don't run setup on first run
-          "--disable-background-networking", // Disable background networking
-          "--disable-default-apps", // Disable default apps
-          "--disable-hang-monitor", // Disable hang monitor
-          "--disable-prompt-on-repost", // Disable prompt on repost
-          "--disable-sync",        // Disable syncing to prevent modification
-          "--disable-web-resources", // Disable web resources to prevent modification
-          "--disable-client-side-phishing-detection", // Disable client-side phishing detection to prevent modification
-          "--safebrowsing-disable-auto-update", // Disable SafeBrowsing auto update to prevent modification
-          "--metrics-recording-only", // Disable metrics recording to prevent modification
-          "--no-default-browser-check", // Don't check if default browser to prevent modification
-          "--no-managed-user-acknowledgment-check", // Don't check if managed user acknowledgment to prevent modification
-          "--no-pings", // Disable pings to prevent modification
-          "--disable-prompt-on-repost", // Disable prompt on repost to prevent modification
-          `--user-data-dir=./viewclass` // Set user data directory to viewclass
+          `--user-data-dir=./viewclass`
         ],
         executablePath:
           process.env.NODE_ENV === "production"
@@ -217,7 +200,7 @@ async function run(){
     console.log("Closing Browser")
     await browser.close();
 }
-run();
+// run();
 
 const port = process.env.PORT || 5002
 app.use("/", router)
