@@ -164,6 +164,10 @@ async function run(){
                 });
               });
             console.log(assignments)
+            await page.goto("https://my.viewclass.com/logout");
+            console.log("logged out successfuly")
+            console.log(await page.evaluate(() => document.title))
+
         }
         else {
             console.log(`Login to ${username} with ${password} was not successful.`)
