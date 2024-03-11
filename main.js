@@ -1,4 +1,4 @@
-const pc = true
+const pc = false
 const cheerio = require('cheerio');
 // const puppeteer = require('puppeteer');
 const { MongoClient } = require('mongodb');
