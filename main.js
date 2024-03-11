@@ -189,9 +189,9 @@ async function run(){
 }
 
 
-
+const port = process.env.PORT || 5002
 app.use("/", router)
-app.listen(process.env.PORT || 80, '0.0.0.0', () => {
+app.listen(port, () => {
     console.log(new Date().toLocaleString())
 })
 
