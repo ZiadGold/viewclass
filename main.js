@@ -1,5 +1,5 @@
 const pc = false
-
+const cheerio = require('cheerio');
 // const puppeteer = require('puppeteer');
 const { MongoClient } = require('mongodb');
 const path = require("path");
@@ -71,11 +71,12 @@ async function run(){
     var browser;
     //const browser = await puppeteer.launch({headless:false, userDataDir: './viewclass'});
     if (pc) {
-      browser = await puppeteer.launch({headless:false, args:[
+      browser = await puppeteer.launch({headless:false, userDataDir: './viewclass', args:[
         '--no-sandbox',
         '--disable-gpu',
         '--enable-webgl',
-        '--window-size=800,800'
+        '--window-size=800,800',
+        `--user-data-dir=./viewclass`
      ]});
     }
     else {
@@ -85,6 +86,7 @@ async function run(){
           "--no-sandbox",
           "--single-process",
           "--no-zygote",
+          `--user-data-dir=./viewclass`
         ],
         executablePath:
           process.env.NODE_ENV === "production"
@@ -105,13 +107,14 @@ async function run(){
 
     await page.setUserAgent(ua);
     // await page.goto(loginUrl, { waitUntil: 'networkidle2' });
-    // await page.type('input[type="email"]', googleUsername);
+    // await new Promise(resolve => setTimeout(resolve, 5000));
+    // await page.type('input[type="email"]', googleUsername, { delay: 50 });
     // await page.keyboard.press('Enter');
-    // await new Promise(resolve => setTimeout(resolve, 2000));
-    // await page.type('input[type="password"]', googlePassword);
+    // await new Promise(resolve => setTimeout(resolve, 5000));
+    // await page.type('input[type="password"]', googlePassword, { delay: 50 });
     // await page.keyboard.press('Enter');
 
-    // await new Promise(resolve => setTimeout(resolve, 5000));
+    // await new Promise(resolve => setTimeout(resolve, 5000 * 60));
 
     await page.goto("https://example.com/");
     console.log(await page.evaluate(() => document.title))
@@ -145,29 +148,34 @@ async function run(){
         console.log(title)
         if (title == "Home | ViewClass LMS") {
             await page.goto("https://my.viewclass.com/student/subject/homework");
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            await page.waitForSelector('div.dataTables_scroll');
 
-            var assignments = await page.evaluate(() => {
-                const rows = Array.from(document.querySelectorAll('#viewTable tbody tr'));
-                return rows.map(row => {
-                  const columns = row.querySelectorAll('td');
-                  return {
-                    title: columns[0].innerText,
-                    course: columns[1].innerText,
-                    publish_date: columns[2].innerText,
-                    cutoff_date: columns[3].innerText,
-                    submit: columns[4].innerText.trim(),
-                    mark: columns[5].innerText,
-                    correcting: columns[6].innerText,
-                    action: columns[7].querySelector('a').innerText.toLowerCase()
-                  };
-                });
-              });
-            console.log(assignments)
+            // Extract the HTML content of the element
+            const assignmentsHTML = await page.$eval('div.dataTables_scroll', element => element.innerHTML);
+          
+            // Parse the HTML content to extract assignment data
+            const assignments = [];
+            const $ = cheerio.load(assignmentsHTML);
+            $('tbody tr').each((index, element) => {
+              const cells = $(element).find('td');
+              const assignment = {
+                title: $(cells[0]).text().trim(),
+                course: $(cells[1]).text().trim(),
+                publish_date: $(cells[2]).text().trim(),
+                cutoff_date: $(cells[3]).text().trim(),
+                submit: $(cells[4]).text().trim(),
+                mark: $(cells[5]).text().trim(),
+                correcting: $(cells[6]).text().trim(),
+                action: $(cells[7]).find('a').text().trim() || ''
+              };
+              assignments.push(assignment);
+            });
+          
+            console.log(assignments);
             await page.goto("https://my.viewclass.com/logout");
-            console.log("logged out successfuly")
-            console.log(await page.evaluate(() => document.title))
-
+            
+            if (await page.evaluate(() => document.title == "تسجيل الدخول | فيوكلاس LMS")) {console.log("logged out successfuly")} 
         }
         else {
             console.log(`Login to ${username} with ${password} was not successful.`)
@@ -186,7 +194,7 @@ async function run(){
     
 
     // Wait for reCAPTCHA challenge completion (adjust the time as needed)
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000*120));
     // await page.screenshot({path: "screenshot.png", fullPage: true})
     // await page.pdf({path: "screenshot.pdf", format: "A4"})
     console.log("Closing Browser")
