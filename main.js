@@ -43,8 +43,7 @@ puppeteer.use(StealthPlugin());
 
 
 
-const googleUsername = "helomen321@gmail.com";
-const googlePassword = "helomen321@1234";
+
 
 
 
@@ -105,19 +104,19 @@ async function run(){
     console.log(await response.json());
 
 
-    const loginUrl = "https://accounts.google.com/AccountChooser?service=mail&continue=https://google.com&hl=en";
+    //const loginUrl = "https://accounts.google.com/AccountChooser?service=mail&continue=https://google.com&hl=en";
     const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'; 
 
     await page.setUserAgent(ua);
-    await page.goto(loginUrl, { waitUntil: 'networkidle2' });
-    await new Promise(resolve => setTimeout(resolve, 5000));
-    await page.type('input[type="email"]', googleUsername, { delay: 50 });
-    await page.keyboard.press('Enter');
-    await new Promise(resolve => setTimeout(resolve, 5000));
-    await page.type('input[type="password"]', googlePassword, { delay: 50 });
-    await page.keyboard.press('Enter');
+    // await page.goto(loginUrl, { waitUntil: 'networkidle2' });
+    // await new Promise(resolve => setTimeout(resolve, 5000));
+    // await page.type('input[type="email"]', googleUsername, { delay: 50 });
+    // await page.keyboard.press('Enter');
+    // await new Promise(resolve => setTimeout(resolve, 5000));
+    // await page.type('input[type="password"]', googlePassword, { delay: 50 });
+    // await page.keyboard.press('Enter');
 
-    await new Promise(resolve => setTimeout(resolve, 5000 * 60));
+    // await new Promise(resolve => setTimeout(resolve, 5000 * 60));
 
     await page.goto("https://example.com/");
     console.log(await page.evaluate(() => document.title))
