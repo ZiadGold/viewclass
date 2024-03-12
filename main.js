@@ -1,4 +1,4 @@
-const pc = true
+const pc = false
 const cheerio = require('cheerio');
 // const puppeteer = require('puppeteer');
 const { MongoClient } = require('mongodb');
@@ -81,13 +81,12 @@ async function run(){
      ]});
     }
     else {
-      browser = await puppeteer.launch({userDataDir: './viewclass', 
+      browser = await puppeteer.launch({
         args: [
           "--disable-setuid-sandbox",
           "--no-sandbox",
           "--single-process",
           "--no-zygote",
-          `--user-data-dir=./viewclass`
         ],
         executablePath:
           process.env.NODE_ENV === "production"
