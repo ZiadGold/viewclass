@@ -169,6 +169,7 @@ var frame;
 
 app.post('/login', (req, res) => {
   async function login() {
+    console.log('login')
     data = req.body //get the data
     status_result = await client.db("viewclass").collection("status").findOne({identity: "status"});
     var status = status_result["status"]
@@ -185,20 +186,22 @@ app.post('/login', (req, res) => {
       else {
         browser = await puppeteer.launch(non_pc_args);
       }
-  
+      console.log('page')
       page = await browser.newPage();
-      await page.setDefaultTimeout(120000);
+      console.log('page after')
+      // await page.setDefaultTimeout(120000);
 
       await page.emulateTimezone('Asia/Riyadh');
-      
+      console.log('page 1')
   
       const ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'; 
-  
+      
       await page.setUserAgent(ua);
-  
+      console.log('page 2')
       await page.goto("https://my.viewclass.com/login?lang=en");
+      console.log('page 3')
       title = await page.evaluate(() => document.title)
-
+      console.log(title)
       // Find the username and password input fields and enter the desired values
       await page.type('input[name="username"]', username);
       await page.type('input[name="password"]', password);
