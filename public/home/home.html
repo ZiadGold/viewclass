@@ -1,17 +1,28 @@
-<!DOCTYPE html>
-<html>
+<html><head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
 
-<head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Home</title>
-  <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/attachments/755803541011955823/1108488197182324848/p-replace-color.ico">
-
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VIEWKAKA | Terminal</title>
+  <link rel="stylesheet" type="text/css" media="screen" href="./home/home.css">
+  <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/attachments/1017081198293553233/1218566381327613962/K__3_-removebg-preview.png?ex=66082161&is=65f5ac61&hm=2d7f78e3a9ead74bd38c8f586c388bd435cb43bd882a1d8415473674c26e5460&">
 </head>
+<body data-new-gr-c-s-check-loaded="14.1162.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.1162.0">
+  <div id="terminal">
+    <p class=""><span class="index">Viewkaka (VK) Not A Corporation. All kaka reserved.</span></p><span class="color2">Welcome to my interactive web terminal.</span></p><p class=""><span class="color2">For a list of available commands, type</span> <span class="command">'help'</span><span class="color2">.</span></p><a id="before"></a>
+  </div>
+  <div id="command" onclick="$('texter').focus();">
+    <textarea type="text" id="texter" onkeyup="typeIt(this, event)" onkeydown="typeIt(this, event); 
+                 moveIt(this.value.length, event)" onkeypress="typeIt(this, event);" autofocus=""></textarea>
+    <div id="liner">
+      <span id="typer"></span><b class="cursor" id="cursor" style="left: 0px;">█</b>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="./home/js/caret.js"></script>
+  <script src="./home/js/commands.js"></script>
+  <script src="./home/js/main.js"></script>
 
-<body>
-    <h1>Hello</h1>
 
-</body>
-
-</html>
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
