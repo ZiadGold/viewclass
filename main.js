@@ -217,23 +217,26 @@ app.post('/login', (req, res) => {
       await frame.click('#recaptcha-anchor-label');
       console.log("shit")
       await new Promise(resolve => setTimeout(resolve, 7000));
+      console.log("700")
       if (await page.evaluate(() => document.title) == "Home | ViewClass LMS") {
-        
+        console.log("Home")
         var response = 1
         console.log(response)
         res.json(response);
       }
       else {
+        console.log("incorrect")
         const isErrorPresent = await page.$$eval('span', spans => 
         spans.some(span => span.textContent === 'Username or password incorrect')
       );
 
       if (isErrorPresent) {
+        console.log("yep incorrect")
         var response = 2
         console.log(response)
         res.json(response);
       } else {
-        
+          console.log("audio")
           await page.waitForSelector('iframe[title="recaptcha challenge expires in two minutes"]');
           frameHandle = await page.$('iframe[title="recaptcha challenge expires in two minutes"]');
           frame = await frameHandle.contentFrame();
