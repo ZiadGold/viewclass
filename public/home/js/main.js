@@ -343,7 +343,6 @@ function handleLoginCommand(args) {
 
   })
 
-  login(args)
   function login(args) {
 
     fetch('/login', {
