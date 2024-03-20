@@ -32,7 +32,6 @@ args: [
   "--no-sandbox",
   "--single-process",
   "--no-zygote",
-  `--user-data-dir=./viewclass`
 ],
 executablePath:
   process.env.NODE_ENV === "production"
